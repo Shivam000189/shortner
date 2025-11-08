@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 require('./config/db');
 const authRoutes = require('./routes/authRoutes')
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 
 
@@ -13,8 +14,8 @@ const SECRET_KEY = process.env.SECRET_KEY;
 const cors = require('cors');
 app.use(cors());
 
-app.use(bodyParser.json());
-app.use('/auth', authRoutes);
+app.use(express.json());
+app.use('/', authRoutes);
 
 
 

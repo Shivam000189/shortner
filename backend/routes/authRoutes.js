@@ -1,7 +1,8 @@
 const express = require('express');
 const User = require('../models/auth');
-const brcypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const authmiddler = require('../middleware/authMiddleware')
 
 
 const SECRET_KEY = process.env.SECRET_KEY;
@@ -20,14 +21,14 @@ router.post("/register", async(req, res) => {
         const existingUser = await User.findOne({email});
         if(existingUser) return res.status(400).json({msg:"Email already exists"});
 
-        const hasdedPassword = await brcypt.hash(password, 10);
+        const hasdedPassword = await bcrypt.hash(password, 10);
 
         await User.create({
             name,
             email,
             password:hasdedPassword
         })
-        res.status(201).json({msg:"User registered Successfully"});
+        res.status(201).json({msg:"User registered successfully"});
     } catch(error){
         console.error("Error during Registeration:", error);
         res.status(500).json({msg:"Server error, please try again later"});
@@ -47,12 +48,12 @@ router.post('/login', async (req, res) => {
         if(!user){
             return res.status(401).json({msg:"Invalid email"});
         }
-        const isMatch = await brcypt.compare(password, user.password);
+        const isMatch = await bcrypt.compare(password, user.password);
         if(!isMatch){
             return res.status(401).json({msg:"Invalid email or password"})
         }
 
-        const token = jwt.sigh(
+        const token = jwt.sign(
             {userId:user._id, email: user.email},
             SECRET_KEY,
             {expiresIn:'1h'}
@@ -66,3 +67,13 @@ router.post('/login', async (req, res) => {
         })
     }
 })
+
+
+router.get('/home', authmiddler, (req, res) => {
+    res.json({
+        msg: `Welcome ${req.user.email}, you are authorized!`,
+    })
+});
+
+
+module.exports = router;
