@@ -34,14 +34,18 @@ router.post('/shorten', async (req, res) => {
         }
 
         
+        try {
+            new URL(originalUrl);
+        } catch (err) {
+            return res.status(400).json({ msg: 'Invalid URL format. Please provide a valid URL with protocol (http:// or https://)' });
+        }
+
+        
         const shortCode = nanoid(6);
 
         
-        const baseUrl = 'bit.ly';
-        const shortUrl = `${baseUrl}/${shortCode}`;
-
-        // const baseUrl = process.env.BASE_URL || `${req.protocol}://${req.get('host')}`;
-        // const shortUrl = `${baseUrl.replace(/\/$/, '')}/${shortCode}`;
+        const baseUrl = process.env.BASE_URL || `${req.protocol}://${req.get('host')}`;
+        const shortUrl = `${baseUrl.replace(/\/$/, '')}/${shortCode}`;
 
         
         const user = getUserFromToken(req);
