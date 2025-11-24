@@ -1,2 +1,17 @@
 @import "tailwindcss";
 
+@theme {
+
+  --color-juniper-50: #f5f8f8;
+  --color-juniper-100: #ddeae9;
+  --color-juniper-200: #bad5d5;
+  --color-juniper-300: #90b7b8;
+  --color-juniper-400: #5f898b;
+  --color-juniper-500: #4f7a7d;
+  --color-juniper-600: #3d6164;
+  --color-juniper-700: #344e51;
+  --color-juniper-800: #2d3f42;
+  --color-juniper-900: #283739;
+  --color-juniper-950: #131f20;
+
+}
