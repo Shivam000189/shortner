@@ -32,7 +32,7 @@ export const ResultCard = ({ data }) => {
 
         {/* Short URL */}
         <div className="flex items-center gap-3">
-          <div className="flex-grow bg-slate-900/50 rounded-lg p-3 border border-slate-700/50 flex items-center justify-between group relative overflow-hidden">
+          <div className="grow bg-slate-900/50 rounded-lg p-3 border border-slate-700/50 flex items-center justify-between group relative overflow-hidden">
             <a
               href={data.shortUrl?.startsWith('http') ? data.shortUrl : `http://${data.shortUrl}`}
               target="_blank"
@@ -42,13 +42,13 @@ export const ResultCard = ({ data }) => {
               {data.shortUrl}
               <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
             </a>
-            <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-slate-900/50 to-transparent pointer-events-none" />
+            <div className="absolute inset-y-0 right-0 w-12 bg-linear-to-l from-slate-900/50 to-transparent pointer-events-none" />
           </div>
 
           <button
             onClick={handleCopy}
             className={`
-              p-3 rounded-lg border transition-all duration-200 flex-shrink-0
+              p-3 rounded-lg border transition-all duration-200 shrink-0
               ${
                 copied
                   ? 'bg-green-500/20 border-green-500/50 text-green-400'
