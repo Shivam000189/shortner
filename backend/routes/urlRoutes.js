@@ -45,6 +45,7 @@ router.post('/shorten', async (req, res) => {
 
         
         const baseUrl = process.env.BASE_URL || `${req.protocol}://${req.get('host')}`;
+        // const baseUrl = `${req.protocol}://${req.get('host')}`;
         const shortUrl = `${baseUrl.replace(/\/$/, '')}/${shortCode}`;
 
         
