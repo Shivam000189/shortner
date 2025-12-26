@@ -44,8 +44,9 @@ router.post('/shorten', async (req, res) => {
         const shortCode = nanoid(6);
 
         
-        const baseUrl = process.env.BASE_URL || `${req.protocol}://${req.get('host')}`;
+        // const baseUrl = process.env.BASE_URL || `${req.protocol}://${req.get('host')}`;
         // const baseUrl = `${req.protocol}://${req.get('host')}`;
+        const baseUrl = `bit.y.${req.get('host')}`;
         const shortUrl = `${baseUrl.replace(/\/$/, '')}/${shortCode}`;
 
         
